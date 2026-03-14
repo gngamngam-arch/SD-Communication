@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SD Communication</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+background:black;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+nav{
+background:#222;
+padding:10px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:15px;
+cursor:pointer;
+font-weight:bold;
+}
+
+section{
+display:none;
+padding:40px;
+}
+
+#home{
+display:block;
+}
+
+.products{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.card{
+background:white;
+width:220px;
+padding:15px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.card img{
+width:100%;
+}
+
+button{
+background:black;
+color:white;
+padding:8px;
+border:none;
+cursor:pointer;
+margin-top:5px;
+}
+
+.adminbox{
+background:white;
+padding:20px;
+width:300px;
+border-radius:10px;
+}
+
+input{
+width:100%;
+padding:8px;
+margin:5px 0;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px;
+border-radius:30px;
+text-decoration:none;
+}
+
+.instagram{
+position:fixed;
+bottom:70px;
+right:20px;
+background:#E1306C;
+color:white;
+padding:12px;
+border-radius:30px;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>SD Communication</h1>
+
+<p>Used & Sealed iPhone | Android | Accessories</p>
+
+<p>📞 9362426136 | 7085525314</p>
+
+</header>
+
+<nav>
+
+<nav>
+
+<nav>
+
+<a onclick="page('home')">Home</a>
+<a onclick="page('shop')">Shop</a>
+<a onclick="page('about')">About</a>
+<a onclick="page('contact')">Contact</a>
+<a onclick="page('adminlogin')">Admin</a>
+
+</nav>
+</nav>
+</nav>
+
+<!-- HOME -->
+
+<section id="home">
+
+<h2>Welcome to SD Communication</h2>
+
+<p>At SD Communication, we specialize in providing high-quality used and sealed smartphones at the best prices. Our goal is to deliver reliable devices with excellent performance so every customer can enjoy premium smartphones without paying premium prices. We offer a wide range of devices including iPhone, Samsung, OnePlus, and other Android smartphones, along with mobile accessories and speakers. Every device we sell goes through a careful inspection and quality check to ensure smooth performance and customer satisfaction. Our aim is that every customer who buys a used phone from us can use it for years without worries. We focus on selling devices that are dependable, durable, and worth your investment. Whether you are looking for a budget smartphone or the latest premium device, SD Communication is your trusted mobile store for the best deals.
+
+</p>
+
+</section>
+
+<!-- SHOP -->
+
+<section id="shop">
+
+<h2>Available Phones</h2>
+
+<div class="products" id="productlist"></div>
+
+</section>
+<!-- ABOUT -->
+
+<section id="about">
+
+<h2>About SD Communication</h2>
+
+<p>
+SD Communication is a trusted mobile phone store dedicated to providing high-quality used and sealed smartphones at competitive prices. Our mission is to make premium mobile technology accessible and affordable for everyone without compromising on reliability and performance. We deal in a wide range of smartphones including iPhone, Samsung, OnePlus, and other leading Android devices, along with mobile accessories and speakers. Each device available at our store is carefully inspected, tested, and quality-checked to ensure it meets our standards before reaching our customers. At SD Communication, we believe that purchasing a used smartphone should be a smart and worry-free investment. Our aim is that every customer who buys a used phone from us can comfortably use it for at least 3 years or more without worries. We focus on offering devices that are dependable, well-maintained, and capable of delivering long-term performance. Customer satisfaction, transparency, and trust are at the heart of everything we do. We strive to build lasting relationships with our customers by providing honest pricing, reliable products, and friendly service. Whether you are looking for a budget-friendly smartphone or a premium device, SD Communication is committed to helping you find the right phone for your needs. All phones are quality checked before selling to ensure smooth performance.
+
+All phones are quality checked before selling to ensure smooth performance.
+</p>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<p>📞 9362426136</p>
+<p>📞 7085525314</p>
+
+<p>Instagram: @sdcommunication03</p>
+
+<p>Opposite Traffic Point Senapati, Manipur 795106</p>
+
+</section>
+
+<!-- ADMIN LOGIN -->
+
+<section id="adminlogin">
+
+<h2>Admin Login</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" placeholder="Password" type="password">
+
+<button onclick="login()">Login</button>
+
+</section>
+
+<!-- ADMIN PANEL -->
+
+<section id="admin">
+
+<h2>Upload New Phone</h2>
+
+<div class="adminbox">
+
+<input id="name" placeholder="Phone Name">
+<input id="price" placeholder="Price">
+<input id="image" placeholder="Image URL">
+
+<button onclick="addPhone()">Add Phone</button>
+
+</div>
+
+</section>
+
+<a class="whatsapp" href="https://wa.me/917085525314">WhatsApp</a>
+<a class="instagram" href="https://instagram.com/sdcommunication03">Instagram</a>
+
+<script>
+
+let isLoggedIn = false;
+
+function page(id){
+
+if(id==="admin" && !isLoggedIn){
+alert("Please login first");
+id="adminlogin";
+}
+
+document.querySelectorAll("section").forEach(x=>x.style.display="none");
+document.getElementById(id).style.display="block";
+
+}
+
+function login(){
+
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
+
+if(u=="Sdcommunication" && p=="Sd1913"){
+
+isLoggedIn=true;
+alert("Login successful");
+page("admin")
+
+}else{
+
+alert("Wrong login")
+
+}
+
+}
+
+let phones=JSON.parse(localStorage.getItem("phones"))||[]
+
+function showPhones(){
+
+let box=document.getElementById("productlist")
+
+box.innerHTML=""
+
+phones.forEach((p,i)=>{
+
+box.innerHTML+=`
+
+<div class="card">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>₹${p.price}</p>
+
+<button onclick="bill('${p.name}','${p.price}')">Generate Bill</button>
+
+<button onclick="deletePhone(${i})">Delete</button>
+
+</div>
+
+`
+
+})
+
+}
+
+function addPhone(){
+
+let name=document.getElementById("name").value
+let price=document.getElementById("price").value
+let image=document.getElementById("image").value
+
+phones.push({name,price,image})
+
+localStorage.setItem("phones",JSON.stringify(phones))
+
+showPhones()
+
+alert("Stock added")
+
+}
+
+function deletePhone(i){
+
+phones.splice(i,1)
+
+localStorage.setItem("phones",JSON.stringify(phones))
+
+showPhones()
+
+}
+
+function bill(name,price){
+
+alert("Invoice\n\nPhone: "+name+"\nPrice: ₹"+price+"\n\nSD Communication")
+
+}
+
+showPhones()
+
+</script>
+
+</body>
+
+</html>
